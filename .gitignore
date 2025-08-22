@@ -1,0 +1,44 @@
+# Dependencies
+node_modules
+pnpm-lock.yaml
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Builds
+dist
+.next
+out
+build
+.cache
+
+# Env files
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Logs
+*.log
+logs
+*.pid
+*.seed
+*.pid.lock
+
+# Turbo / Monorepo caches
+.turbo
+.turborepo
+
+# Don’t ignore shared packages
+packages/*/node_modules
