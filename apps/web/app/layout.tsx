@@ -22,13 +22,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
-  );
+    return (
+        <html lang="ru">
+        <body className="min-h-screen bg-gray-50 text-gray-900">
+        <header className="border-b bg-white">
+            <div className="mx-auto max-w-4xl px-4 py-3 flex items-center justify-between">
+                <h1 className="font-semibold">Content Assistant</h1>
+                <nav className="text-sm space-x-4">
+                    <a href="/" className="hover:underline">Создать драфт</a>
+                    <a href="/upload" className="hover:underline">Загрузка</a>
+                    <a href="/drafts" className="hover:underline">Черновики</a>
+                </nav>
+            </div>
+        </header>
+        <main className="mx-auto max-w-4xl px-4 py-6">{children}</main>
+        </body>
+        </html>
+    );
 }

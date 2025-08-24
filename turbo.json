@@ -6,7 +6,12 @@
       "outputs": ["dist/**", ".next/**"]
     },
     "dev": {
-      "cache": false
+      "cache": false,
+      "env": [
+        "OPENAI_API_KEY",
+        "SUPABASE_URL",
+        "SUPABASE_KEY"
+      ]
     }
   }
 }
