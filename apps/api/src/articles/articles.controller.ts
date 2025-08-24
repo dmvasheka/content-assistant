@@ -14,4 +14,9 @@ export class ArticlesController {
     async create(@Body() dto: { title: string; content: string }) {
         return this.articlesService.create(dto.title, dto.content);
     }
+
+    @Post('generate')
+    async generate(@Body() dto: { topic: string }) {
+        return this.articlesService.generateDraft(dto.topic);
+    }
 }

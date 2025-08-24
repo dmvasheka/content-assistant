@@ -5,6 +5,8 @@ import { SupabaseModule } from './supabase/supabase.module';
 import { ArticlesModule } from './articles/articles.module';
 import { GenerateModule } from './generate/generate.module';
 import {ConfigModule} from "@nestjs/config";
+import {DocumentsModule} from "./documents/documents.module";
+import {AiModule} from "./ai/ai.module";
 
 @Module({
   imports: [SupabaseModule, ArticlesModule,ConfigModule.forRoot({
@@ -13,7 +15,11 @@ import {ConfigModule} from "@nestjs/config";
           '.env',
           '../../.env',
       ],
-  }), GenerateModule],
+  }),
+      GenerateModule,
+      DocumentsModule,
+      AiModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
