@@ -1,10 +1,18 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { SupabaseClient } from '@supabase/supabase-js';
-import {AiService} from "../ai/ai.service";
+import { AiService } from "../ai/ai.service";
+import { SupabaseService } from "../supabase/supabase.service";
 
 @Injectable()
 export class ArticlesService {
-    constructor(@Inject('SUPABASE_CLIENT') private supabase: SupabaseClient, private aiService: AiService) {}
+    private supabase: SupabaseClient;
+    
+    constructor(
+        private readonly supabaseService: SupabaseService,
+        private readonly aiService: AiService
+    ) {
+        this.supabase = this.supabaseService.getClient();
+    }
 
     async getAll() {
         const { data, error } = await this.supabase.from('articles').select('*');
