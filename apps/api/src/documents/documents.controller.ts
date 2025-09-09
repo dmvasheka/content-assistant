@@ -12,4 +12,9 @@ export class DocumentsController {
     ) {
         return this.docs.addDocument(title, content);
     }
+
+    @Post('search')
+    async search(@Body('query') query: string) {
+        return this.docs.searchDocuments(query);
+    }
 }
