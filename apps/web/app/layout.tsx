@@ -32,6 +32,8 @@ export default function RootLayout({
                     <a href="/" className="hover:underline">Создать драфт</a>
                     <a href="/upload" className="hover:underline">Загрузка</a>
                     <a href="/drafts" className="hover:underline">Черновики</a>
+                    <a href="/generate" className="hover:underline">Сгенерировать</a>
+                    <a href="/documents" className="hover:underline">Documents</a>
                 </nav>
             </div>
         </header>
