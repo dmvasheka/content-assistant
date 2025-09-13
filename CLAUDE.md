@@ -145,14 +145,19 @@ This is an educational project where understanding the "why" and "how" is as imp
 - After upload → API saves embedding to Supabase
 - Test similar document search by embedding (top 5)
 
-**Day 6** 🎯 **CURRENT**
+**Day 6** ✅ **COMPLETED**
 - Connect everything:
   - Input topic → find relevant documents → assistant writes draft
   - Return draft with citations/links to sources
+- ✅ RAG-пайплайн реализован
+- ✅ Frontend модернизирован с Markdown поддержкой
+- ✅ Система цитат и источников
 
-**Day 7**
-- UI: display draft in Markdown
-- Add citations list at bottom (with clickable links)
+**Day 7** 🎯 **CURRENT**
+- UI: display draft in Markdown ✅ (уже сделано в День 6)
+- Add citations list at bottom (with clickable links) ✅ (уже сделано в День 6)
+- 🔧 Fix embedding search issues (документы не находятся при поиске)
+- 📊 Add generation history tracking
 
 ### Week 2 — Improvements and "Wow" Effect
 
