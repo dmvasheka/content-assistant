@@ -9,6 +9,6 @@ import {SupabaseModule} from "../supabase/supabase.module";
     imports: [SupabaseModule],
     controllers: [DocumentsController],
     providers: [DocumentsService, EmbeddingService],
-
+    exports: [DocumentsService], // Экспортируем для использования в других модулях
 })
 export class DocumentsModule {}
