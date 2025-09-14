@@ -8,6 +8,7 @@ import { GenerateModule } from './generate/generate.module';
 import {ConfigModule} from "@nestjs/config";
 import {DocumentsModule} from "./documents/documents.module";
 import {AiModule} from "./ai/ai.module";
+import {HistoryModule} from "./history/history.module";
 
 @Module({
   imports: [SupabaseModule, ArticlesModule,ConfigModule.forRoot({
@@ -19,7 +20,8 @@ import {AiModule} from "./ai/ai.module";
   }),
       GenerateModule,
       DocumentsModule,
-      AiModule
+      AiModule,
+      HistoryModule
   ],
   controllers: [AppController],
   providers: [AppService],

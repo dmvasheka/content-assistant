@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject, Optional } from '@nestjs/common';
 import OpenAI from 'openai';
 import { DocumentsService } from '../documents/documents.service';
+import { HistoryService } from '../history/history.service';
 
 type Citation = { id: string; url?: string; quote: string; title: string };
 type GenerateResponse = { draft: string; citations: Citation[] };
@@ -9,7 +10,10 @@ type GenerateResponse = { draft: string; citations: Citation[] };
 export class GenerateService {
     private client: OpenAI | null = null;
 
-    constructor(private readonly documentsService: DocumentsService) {
+    constructor(
+        private readonly documentsService: DocumentsService,
+        @Optional() private readonly historyService?: HistoryService
+    ) {
         const key = process.env.OPENAI_API_KEY;
         if (key) this.client = new OpenAI({ apiKey: key });
     }
@@ -28,10 +32,22 @@ export class GenerateService {
                 url: `#doc-${doc.id}`,
             }));
 
-            return {
+            const fallbackResponse = {
                 draft: `# ${topic}\n\nЭто мок-черновик с реальными источниками.\n\nНайдено документов: ${relevantDocs.length}\n\n${mockCitations.map(c => `[${c.id}] ${c.quote}`).join('\n\n')}\n\n## Источники\n${mockCitations.map(c => `[${c.id}] ${c.title}`).join('\n')}`,
                 citations: mockCitations,
             };
+
+            // Save fallback to history too
+            try {
+                if (this.historyService) {
+                    await this.historyService.saveGeneration(topic, fallbackResponse.draft, fallbackResponse.citations);
+                    console.log(`[RAG] Fallback генерация сохранена в историю`);
+                }
+            } catch (historyError) {
+                console.error(`[RAG] Ошибка сохранения fallback в историю:`, historyError);
+            }
+
+            return fallbackResponse;
         }
 
         // Шаг 2: Подготовка контекста из найденных документов
@@ -103,6 +119,18 @@ ${context}
             }
             
             console.log(`[RAG] Сгенерирована статья с ${parsed.citations.length} цитатами`);
+
+            // Save to generation history
+            try {
+                if (this.historyService) {
+                    await this.historyService.saveGeneration(topic, parsed.draft, parsed.citations);
+                    console.log(`[RAG] Генерация сохранена в историю`);
+                }
+            } catch (historyError) {
+                console.error(`[RAG] Ошибка сохранения в историю:`, historyError);
+                // Don't fail the generation if history save fails
+            }
+
             return parsed;
             
         } catch (error) {
