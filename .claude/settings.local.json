@@ -9,7 +9,8 @@
       "Bash(npx nest start:*)",
       "Bash(timeout:*)",
       "Bash(findstr:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []

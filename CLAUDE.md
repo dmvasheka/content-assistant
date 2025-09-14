@@ -75,12 +75,14 @@ npm run lint               # ESLint for Next.js
 - **Modular architecture** with feature modules:
   - `SupabaseModule` - Database integration
   - `ArticlesModule` - Article management
-  - `GenerateModule` - AI content generation
-  - `DocumentsModule` - Document processing
+  - `GenerateModule` - AI content generation with automatic history tracking
+  - `DocumentsModule` - Document processing and vector search
   - `AiModule` - AI services integration
+  - `HistoryModule` - Generation history tracking and search API
 - **Configuration** via environment variables with global ConfigModule
 - **Database**: Supabase (PostgreSQL) with pgvector for embeddings
 - **AI Integration**: OpenAI API for content generation and embeddings
+- **History Tracking**: Automatic saving of all generations with full-text search
 
 ### Frontend (Next.js)
 - **App Router** structure in `apps/web/app/`
@@ -153,11 +155,15 @@ This is an educational project where understanding the "why" and "how" is as imp
 - ✅ Frontend модернизирован с Markdown поддержкой
 - ✅ Система цитат и источников
 
-**Day 7** 🎯 **CURRENT**
+**Day 7** ✅ **COMPLETED**
 - UI: display draft in Markdown ✅ (уже сделано в День 6)
 - Add citations list at bottom (with clickable links) ✅ (уже сделано в День 6)
-- 🔧 Fix embedding search issues (документы не находятся при поиске)
-- 📊 Add generation history tracking
+- 🔧 Fix embedding search issues (документы не находятся при поиске) ✅
+- 📊 Add generation history tracking ✅
+- ✅ Реализована полная система отслеживания истории генерации
+- ✅ API endpoints: GET/POST /history, /history/search, /history/:id
+- ✅ Автоматическое сохранение всех генераций в БД
+- ✅ Полнотекстовый поиск по истории с поддержкой русского языка
 
 ### Week 2 — Improvements and "Wow" Effect
 
